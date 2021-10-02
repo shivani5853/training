@@ -1,15 +1,12 @@
 package com.appoinmentscheduling.entity;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,9 +34,9 @@ public class Appointment {
 
 	private String reson;
 
-	@ManyToMany(mappedBy = "appointment")
-	private List<Patient> patient;
+	@ManyToOne
+	private Patient patient;
 
-	@ManyToMany(mappedBy = "appointment")
-	private List<Doctor> doctor;
+	@ManyToOne
+	private Doctor doctor;
 }

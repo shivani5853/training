@@ -2,6 +2,7 @@ package com.appoinmentscheduling.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -35,24 +37,21 @@ public class Doctor {
 	private int id;
 
 	@NotNull
-	@Positive
 	@Size(min = 2, max = 50)
 	private String name;
 
 	@NotNull
-	@Positive
 	@Size(min = 6, max = 11)
 	private long phoneNumber;
 
 	@NotNull
-	@Positive
 	@Email
 	private String email;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Patient patient;
-
 	@ManyToMany
+	private List<Patient> patient;
+
+	@OneToMany
 	private List<Appointment> appointment;
 
 }
