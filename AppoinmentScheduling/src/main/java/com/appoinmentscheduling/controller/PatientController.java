@@ -2,6 +2,8 @@ package com.appoinmentscheduling.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appoinmentscheduling.entity.Appointment;
 import com.appoinmentscheduling.entity.Patient;
 import com.appoinmentscheduling.service.PatientService;
 
@@ -37,13 +40,19 @@ public class PatientController {
 
 	@PostMapping("/save")
 	@ResponseStatus(code = HttpStatus.OK)
-	public Patient savePatient(@RequestBody Patient patient) {
+	public Patient savePatient(@Valid @RequestBody Patient patient) {
 		return patientService.savePatientDetails(patient);
 	}
 
 	@DeleteMapping("/{patientId}")
 	public Patient deletePatient(@PathVariable("patientId") int id) {
 		return patientService.removePatient(id);
+	}
+	
+	@PostMapping("/requestAppointment")
+	@ResponseStatus(code = HttpStatus.OK)
+	public Appointment requestAppointment(@Valid @RequestBody Appointment appointment) {
+		return patientService.requestAppoinment(appointment);
 	}
 
 }

@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.appoinmentscheduling.entity.Appointment;
 import com.appoinmentscheduling.entity.Patient;
+import com.appoinmentscheduling.repository.AppoinmentRepository;
 import com.appoinmentscheduling.repository.PatientRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class PatientService {
 
 	@Autowired
 	PatientRepository patientRepository;
+	
+	@Autowired
+	private AppoinmentRepository appoinmentRepository;
 
 	public Patient savePatientDetails(Patient patient) {
 		return patientRepository.save(patient);
@@ -43,5 +48,9 @@ public class PatientService {
 		return null;
 	}
 	
+	public Appointment requestAppoinment(Appointment appointment) {
+		System.out.println("Request appoinment Booking");
+		return appoinmentRepository.save(appointment);
+	}
 	
 }
